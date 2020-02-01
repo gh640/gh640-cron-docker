@@ -3,7 +3,7 @@
 This is a tiny WordPress plugin which prevents WordPress automatic update from
 failing when run in a Docker container.
 
-WordPress doesn't recognize the own domain correctly if the port-fowarding is enabled for different ports when run in a Docker container:
+WordPress doesn't recognize the own domain correctly if port fowarding is enabled for different ports when run in a Docker container:
 
 ```yaml
 version: "3"

@@ -12,9 +12,11 @@ $port_guest = getenv('DOCKER_HTTP_PORT_GUEST');
 $port_host = getenv('DOCKER_HTTP_PORT_HOST');
 
 if ($port_guest && $port_host) {
-  add_filter( 'cron_request', function ( $cron_request_array, $doing_wp_cron ) use ($port_guest, $port_host) {
-    $cron_request_array['url'] = mb_ereg_replace( ":${port_host}/" , ":${port_guest}/", $cron_request_array['url']);
+  add_filter( 'requests-requests.before_request', function ( &$url, &$headers, &$data ) use ( $port_guest, $port_host ) {
+    $siteurl = get_option( 'siteurl' );
 
-    return $cron_request_array;
-  } , 10, 2 );
+    if ( is_string( $url ) && mb_strpos( $url, $siteurl ) === 0 ) {
+      $url = mb_ereg_replace( ":${port_host}/" , ":${port_guest}/", $url );
+    }
+  }, 10, 3 );
 }

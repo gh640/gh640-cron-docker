@@ -8,6 +8,8 @@
  * @package         gh640-cron-docker
  */
 
+defined( 'ABSPATH' ) || exit;
+
 $port_guest = getenv('DOCKER_HTTP_PORT_GUEST');
 $port_host = getenv('DOCKER_HTTP_PORT_HOST');
 
